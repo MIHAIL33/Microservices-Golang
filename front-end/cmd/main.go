@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"html/template"
 	"log"
 	"net/http"
@@ -16,7 +15,7 @@ func main() {
 		render(w, "templates/test.page.gohtml")
 	})
 
-	fmt.Println("Starting front-end on port " + PORT)
+	log.Println("Starting front-end on port " + PORT)
 	err := http.ListenAndServe(":" + PORT, nil)
 	if err != nil {
 		log.Panic(err)
