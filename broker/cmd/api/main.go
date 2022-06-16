@@ -6,7 +6,7 @@ import (
 )
 
 const (
-	PORT = "8000"
+	PORT = "80"
 )
 
 type Config struct {}
