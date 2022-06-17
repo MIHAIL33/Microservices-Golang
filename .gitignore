@@ -2,5 +2,6 @@
 /broker/brokerApp
 /front-end/frontApp
 /logger/loggerApp
+/mail/mailApp
 
 /project/db-data
