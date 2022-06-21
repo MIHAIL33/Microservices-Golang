@@ -3,5 +3,6 @@
 /front-end/frontApp
 /logger/loggerApp
 /mail/mailApp
+/listener/listenerApp
 
 /project/db-data

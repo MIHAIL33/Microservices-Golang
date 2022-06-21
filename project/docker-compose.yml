@@ -38,6 +38,16 @@ services:
       mode: replicated
       replicas: 1
 
+  listener:
+    container_name: listener-service
+    build:
+      context: ./../listener
+      dockerfile: ./../listener/listener.dockerfile
+    restart: always
+    deploy:
+      mode: replicated
+      replicas: 1
+
   mail:
     container_name: mail-service
     build:
