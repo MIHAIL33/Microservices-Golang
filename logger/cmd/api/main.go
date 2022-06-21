@@ -4,7 +4,9 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"net"
 	"net/http"
+	"net/rpc"
 	"time"
 
 	"github.com/MIHAIL33/Microservices-Golang/logger/data"
@@ -46,6 +48,9 @@ func main() {
 		Models: data.New(client),
 	}
 
+	err = rpc.Register(new(RPCServer))
+	go app.rpcListen()
+
 	log.Println("Starting logger service on port ", webPORT)
 	srv := &http.Server{
 		Addr: fmt.Sprintf(":%s", webPORT),
@@ -55,6 +60,23 @@ func main() {
 	err = srv.ListenAndServe()
 	if err != nil {
 		log.Panic(err)
+	}
+}
+
+func (app *Config) rpcListen() error {
+	log.Println("Starting RPC server on port ", rpcPORT)
+	listen, err := net.Listen("tcp", fmt.Sprintf("0.0.0.0:%s", rpcPORT))
+	if err != nil {
+		return err
+	}
+	defer listen.Close()
+
+	for {
+		rpcConn, err := listen.Accept()
+		if err != nil {
+			continue
+		}
+		go rpc.ServeConn(rpcConn)
 	}
 }
 
